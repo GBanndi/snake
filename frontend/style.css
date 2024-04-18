@@ -1,0 +1,17 @@
+.centered {
+    width: 50%;
+    margin-top: 75px;
+    margin-left: 250px;
+}
+#result{
+    width: 50%;
+    margin-top: 25px;
+    margin-left: 150px;
+    text-align: center;
+}
+h1{
+    width: 50%;
+    margin-top: 55px;
+    margin-left: 150px;
+    text-align: center;
+}
