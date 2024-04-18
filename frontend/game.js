@@ -50,7 +50,10 @@ const move = () => {
         newHead.y = my - 1;
     }
 
-    if (newHead.x === fruit.x && newHead.y === fruit.y) {
+    if (newHead.x === fruit.x && newHead.y === fruit.y ||
+        newHead.x === fruit.x + 1 && newHead.y === fruit.y + 1 ||
+        newHead.x === fruit.x && newHead.y === fruit.y + 1 ||
+        newHead.x === fruit.x + 1 && newHead.y === fruit.y) {
         fruit.x = Math.floor(Math.random() * 50);
         fruit.y = Math.floor(Math.random() * 50);
         counter++;
@@ -62,7 +65,6 @@ const move = () => {
     tail.push(newHead); //add the new head
     draw();
 }
-
 
 function breath() {
 
@@ -117,7 +119,6 @@ function breath() {
     ctx.fillRect(snakeHead.x * 10, snakeHead.y * 10, width, height);
 }
 
-
 const draw = () => {
     ctx.clearRect(0, 0, 500, 500);      //letisztítja a vásznat
 
@@ -127,11 +128,11 @@ const draw = () => {
     });
 
     ctx.fillStyle = "#d40d0d";
-    ctx.fillRect(fruit.x * 10, fruit.y * 10, 10, 10);
+    ctx.fillRect(fruit.x * 10, fruit.y * 10, 20, 20);
 };
 
-function resultCounter(){
-    document.getElementById("result").innerHTML = "You have eaten " + counter + "apple!";
+function resultCounter() {
+    document.getElementById("result").innerHTML = "You have eaten " + counter + " apple!";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -139,11 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx = canvas.getContext("2d");
 
     draw();
-
-    let timerId = setInterval(move, 100);
+    let timerId = setInterval(move, 150);
 
 });
-
 document.addEventListener("keydown", (event) => {
     console.log("Key pressed down:", event);
     if (event.code === "ArrowUp") {
