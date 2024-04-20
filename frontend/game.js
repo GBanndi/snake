@@ -6,6 +6,8 @@ let ctx;        //kontext rövidítése kb. egy ceruza
 let isFrozen = false;
 let lastMove;
 let counter = 0;
+let timeOut = 150;
+let timerId = 1;
 
 const tail = [
     {x: 1, y: 1},
@@ -56,6 +58,11 @@ const move = () => {
         newHead.x === fruit.x + 1 && newHead.y === fruit.y) {
         fruit.x = Math.floor(Math.random() * 50);
         fruit.y = Math.floor(Math.random() * 50);
+        timeOut -= 5;
+        console.log(timeOut);
+        clearInterval(timerId);
+        console.log("cleared interval");
+        fasten();
         counter++;
         resultCounter();
     } else {
@@ -64,6 +71,10 @@ const move = () => {
 
     tail.push(newHead); //add the new head
     draw();
+}
+
+function fasten() {
+    timerId = setInterval(move, timeOut);
 }
 
 function breath() {
@@ -120,6 +131,7 @@ function breath() {
 }
 
 const draw = () => {
+
     ctx.clearRect(0, 0, 500, 500);      //letisztítja a vásznat
 
     ctx.fillStyle = "#0534ee";
@@ -136,11 +148,14 @@ function resultCounter() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    console.log(timerId);
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
 
+    fasten();
+    console.log("timerid in main: " + timerId);       //1
+    console.log("timeOut in main: " + timeOut)      //150
     draw();
-    let timerId = setInterval(move, 150);
 
 });
 document.addEventListener("keydown", (event) => {
